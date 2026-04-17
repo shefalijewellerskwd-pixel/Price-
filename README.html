@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shefali Jewellers</title>
+    <style>
+        body { font-family: Arial; background: #111; color: white; text-align: center; }
+        .box { margin: 50px auto; padding: 20px; width: 300px; background: #222; border-radius: 10px; }
+        input, button { padding: 10px; margin: 10px; width: 90%; border-radius: 5px; border: none; }
+        button { background: gold; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+
+<h1>Shefali Jewellers</h1>
+
+<div id="login" class="box">
+    <h2>Login</h2>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<div id="panel" class="box" style="display:none;">
+    <h2>Update Rates</h2>
+    <input type="number" id="gold" placeholder="Gold Rate">
+    <input type="number" id="silver" placeholder="Silver Rate">
+    <button onclick="saveRates()">Save</button>
+</div>
+
+<div class="box">
+    <h2>Today Rates</h2>
+    <p>Gold: ₹ <span id="showGold">0</span></p>
+    <p>Silver: ₹ <span id="showSilver">0</span></p>
+</div>
+
+<script>
+    const correctPassword = "1234";
+
+    function login() {
+        let pass = document.getElementById("password").value;
+        if(pass === correctPassword) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("panel").style.display = "block";
+        } else {
+            alert("Wrong Password");
+        }
+    }
+
+    function saveRates() {
+        let gold = document.getElementById("gold").value;
+        let silver = document.getElementById("silver").value;
+
+        localStorage.setItem("gold", gold);
+        localStorage.setItem("silver", silver);
+
+        showRates();
+    }
+
+    function showRates() {
+        document.getElementById("showGold").innerText = localStorage.getItem("gold") || 0;
+        document.getElementById("showSilver").innerText = localStorage.getItem("silver") || 0;
+    }
+
+    showRates();
+</script>
+
+</body>
+</html>
